@@ -51,13 +51,25 @@ logs/
 .DS_Store
 Thumbs.db
 
-# Data files (optional - 필요시 주석 해제)
-# *.csv
-# *.xlsx
-# *.json
+# Data files (대용량 파일 제외)
+*.csv
+*.xlsx
+daily_prices.csv
+data/*.csv
+data/*.xlsx
 
 # Reports
 # ai_analysis_report_*.md
+
+# Backup files
+*.bak
+*.backup
+*_backup/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
 
 # Streamlit
 .streamlit/secrets.toml
