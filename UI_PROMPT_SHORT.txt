@@ -1,0 +1,63 @@
+StockGravity UI 디자인 리뷰 요청
+
+# 시스템 개요
+한국 주식 자동 분석 시스템. Streamlit 웹 대시보드.
+
+# 워크플로우
+매일 15:20 → 2,790개 필터링 → 500개 Stock Pool 저장 → Top 20 AI 분석 → 사용자가 AI Reports에서 Approve → Trading Approval Queue 이동 → 3~7일 모니터링 → 매매 시작 → Active Trades → 거래 완료
+
+# 현재 페이지 구조
+
+## 1. Dashboard (app.py) - 거의 비어있음
+- 전체 현황 한눈에 보기 필요
+
+## 2. Stock Pool (500개 종목)
+- 사이드바: Status/점수/거래대금/날짜 필터
+- 메인: 테이블(30개 페이지네이션) + 선택 시 메모/메트릭/액션 버튼
+- 문제: 페이지네이션 불편, 배지 의미 불명확
+
+## 3. AI Reports (Top 20 AI 분석)
+- 필터: 추천등급(🟢STRONG_APPROVE/🟡WATCH_MORE/🔴DO_NOT_APPROVE), 리포트상태(🟢ACTIVE/💰TRADED/🔴DROPPED)
+- 메인: Expander 카드 20개 (제목 클릭해야 내용 보임)
+  - 내용: 요약/메트릭/모멘텀/유동성/리스크 탭/Approve버튼
+- 문제: Expander 방식이라 비교 어려움, 20개면 스크롤 너무 김
+
+## 4. Trading (3개 탭)
+### Tab1: Approval Queue (approved 종목)
+- 메트릭: Queue수/재평가대상/평균점수
+- 테이블 선택 → 상세(차트 3개: 가격 캔들+MA, 거래량, RSI) + 액션버튼(매매시작/재평가/제거)
+- 문제: 너무 기능 많음
+
+### Tab2: Active Trades (trading 종목) - 현재 비어있음
+- 테이블: 진입가/현재가/수익률
+
+### Tab3: Trade History (completed 종목) - 현재 비어있음
+- 테이블: 진입가/청산가/수익률
+
+## 5. Stock Detail - 구현 안 됨
+- 필요: 종합 차트, AI 리포트 히스토리, 메모, 재평가 로그
+
+# 사이드바 공통
+- Quick Stats: AI분석 8개, Approved 12개, 후보종목 488개
+
+# 핵심 질문
+
+1. **Dashboard**: 뭘 보여줘야 함? (워크플로우 진행상황 vs 숫자 메트릭 vs 해야할일)
+
+2. **AI Reports 20개**: Expander 말고 어떻게?
+   - 테이블+우측패널? 그리드카드? 탭으로 등급분리?
+
+3. **Stock Pool(500) vs AI Reports(20)**: 역할 구분 명확? 통합 가능?
+
+4. **Trading > Approval Queue**: 너무 복잡함. 간소화 or 분리?
+
+5. **페이지 순서**: 현재 Dashboard/StockPool/AIReports/Trading인데, 워크플로우 순서로 재정렬?
+
+6. **아이콘 색상**:
+   - 추천: 🟢/🟡/🔴
+   - 리포트상태: 🟢ACTIVE/💰TRADED/🔴DROPPED
+   - 종목상태: 👀monitoring/✅approved/❌rejected/💰trading/✔️completed
+   - 정리 필요?
+
+# 요청사항
+각 페이지의 최적 레이아웃, 정보 계층구조, 사용자 플로우 개선, 색상시스템 정리 제안해주세요!
