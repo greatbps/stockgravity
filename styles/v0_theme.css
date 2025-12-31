@@ -1,0 +1,217 @@
+/* StockGravity v0 Theme for Streamlit */
+
+:root {
+    /* Color System */
+    --color-success: #65A150;
+    --color-success-bg: rgba(101, 161, 80, 0.1);
+    --color-warning: #C5A940;
+    --color-warning-bg: rgba(197, 169, 64, 0.1);
+    --color-info: #4D8FC7;
+    --color-info-bg: rgba(77, 143, 199, 0.1);
+    --color-destructive: #C75545;
+    --color-destructive-bg: rgba(199, 85, 69, 0.1);
+    --color-primary: #5560C7;
+    --color-primary-bg: rgba(85, 96, 199, 0.1);
+
+    /* Neutral */
+    --color-foreground: #262626;
+    --color-muted: #737373;
+    --color-border: #e5e5e5;
+    --color-background: #fafafa;
+}
+
+/* Report List Item */
+.report-list-item {
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+}
+
+.report-list-item:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-bg);
+}
+
+.report-list-item.selected {
+    border-color: var(--color-primary);
+    border-width: 2px;
+    background: var(--color-primary-bg);
+}
+
+/* Rank Badge */
+.rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--color-background);
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 0.875rem;
+    color: var(--color-foreground);
+}
+
+/* Recommendation Badge */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-buy {
+    background: var(--color-success);
+    color: white;
+}
+
+.badge-hold {
+    background: var(--color-warning);
+    color: white;
+}
+
+.badge-monitor {
+    background: var(--color-info);
+    color: white;
+}
+
+/* Price Change */
+.price-change {
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.price-change.positive {
+    color: var(--color-success);
+}
+
+.price-change.negative {
+    color: var(--color-destructive);
+}
+
+/* Metrics */
+.metric-value {
+    font-family: monospace;
+    font-weight: 600;
+    color: var(--color-foreground);
+}
+
+.metric-label {
+    color: var(--color-muted);
+    font-size: 0.875rem;
+}
+
+/* KPI Card */
+.kpi-card {
+    padding: 1.5rem;
+    border: 2px solid var(--color-border);
+    border-radius: 0.5rem;
+    background: white;
+}
+
+.kpi-card.success {
+    border-color: rgba(101, 161, 80, 0.3);
+    background: var(--color-success-bg);
+}
+
+.kpi-card.warning {
+    border-color: rgba(197, 169, 64, 0.3);
+    background: var(--color-warning-bg);
+}
+
+.kpi-card.info {
+    border-color: rgba(77, 143, 199, 0.3);
+    background: var(--color-info-bg);
+}
+
+/* Progress Bar */
+.progress-bar {
+    height: 0.5rem;
+    border-radius: 0.25rem;
+    background: var(--color-background);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--color-success);
+    transition: width 0.3s;
+}
+
+/* Key Factors List */
+.key-factors {
+    list-style: none;
+    padding: 0;
+}
+
+.key-factors li {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.key-factors .checkmark {
+    color: var(--color-success);
+    font-weight: bold;
+}
+
+/* Streamlit Overrides */
+.stButton > button {
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.stButton > button[kind="primary"] {
+    background: var(--color-success);
+    border: none;
+}
+
+.stButton > button[kind="primary"]:hover {
+    background: #5a9148;
+}
+
+.stButton > button[kind="secondary"] {
+    background: transparent;
+    border: 1px solid var(--color-border);
+}
+
+.stButton > button[kind="secondary"]:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-bg);
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 0.5rem;
+}
+
+.stTabs [data-baseweb="tab"] {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+/* Monospace for codes and numbers */
+.mono {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}

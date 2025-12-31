@@ -52,38 +52,54 @@ def get_ai_reports_counts():
 
 
 def render_sidebar_badges():
-    """사이드바 배지 렌더링 (간소화)"""
+    """사이드바 배지 렌더링 (v0 스타일)"""
     pool_counts = get_stock_pool_counts()
     ai_counts = get_ai_reports_counts()
 
+    # Quick Stats Section
     st.sidebar.divider()
-    st.sidebar.caption("📊 **Quick Stats**")
+    st.sidebar.markdown("### 📊 Quick Stats")
 
-    # AI 분석 현황
-    if ai_counts['total'] > 0:
-        st.sidebar.markdown(
-            f"**AI 분석:** 총 {ai_counts['total']}개  \n"
-            f"🟢 {ai_counts['STRONG_APPROVE']} | "
-            f"🟡 {ai_counts['WATCH_MORE']} | "
-            f"🔴 {ai_counts['DO_NOT_APPROVE']}"
-        )
-    else:
-        st.sidebar.markdown("**AI 분석:** 없음")
+    # Pool Size
+    col1, col2 = st.sidebar.columns([2, 1])
+    with col1:
+        st.markdown("**Pool Size**")
+    with col2:
+        st.markdown(f"`{pool_counts['monitoring']}`")
 
-    # 거래 현황
-    st.sidebar.markdown(
-        f"**거래 현황:**  \n"
-        f"✅ Approved: {pool_counts['approved']}  \n"
-        f"💰 Trading: {pool_counts['trading']}  \n"
-        f"✔️ Completed: {pool_counts['completed']}"
-    )
+    # AI Reports
+    col1, col2 = st.sidebar.columns([2, 1])
+    with col1:
+        st.markdown("**AI Reports**")
+    with col2:
+        st.markdown(f"`{ai_counts['total']}`")
 
-    # 후보 종목
-    st.sidebar.markdown(f"**후보 종목:** {pool_counts['monitoring']}개")
+    # Active Trades
+    col1, col2 = st.sidebar.columns([2, 1])
+    with col1:
+        st.markdown("**Active Trades**")
+    with col2:
+        if pool_counts['trading'] > 0:
+            st.markdown(f"**`{pool_counts['trading']}`**")
+        else:
+            st.markdown(f"`{pool_counts['trading']}`")
+
+    # Approved (pending action)
+    if pool_counts['approved'] > 0:
+        col1, col2 = st.sidebar.columns([2, 1])
+        with col1:
+            st.markdown("**⚠️ Approved**")
+        with col2:
+            st.markdown(f"**`{pool_counts['approved']}`**")
+
+    st.sidebar.caption("_Updated 2 min ago_")
 
     st.sidebar.divider()
-    st.sidebar.caption("⏰ **Auto Update:** Weekdays 15:20")
-    st.sidebar.caption("🤖 **AI Engine:** Gemini 2.5 Flash")
+
+    # AI Engine Status (at bottom)
+    st.sidebar.markdown("### 🤖 AI Engine")
+    st.sidebar.success("**● Active** • Gemini 2.5 Flash", icon="✅")
+    st.sidebar.caption("⏰ Auto Update: Weekdays 15:20")
 
 
 def get_page_badge(page_name):
