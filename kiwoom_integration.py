@@ -8,6 +8,7 @@ import os
 from dotenv import load_dotenv
 from db_config import get_db_connection
 from datetime import datetime
+from market_utils import is_trading_day, get_next_trading_day
 
 # 환경 변수 로드
 load_dotenv()
