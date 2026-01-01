@@ -22,7 +22,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-from page_modules import trading_compact as trading
+from page_modules import kiwoom_monitoring as trading
 from sidebar_utils import render_sidebar_badges
 
 st.sidebar.title("📊 StockGravity")
