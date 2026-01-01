@@ -8,6 +8,7 @@ import streamlit as st
 import pandas as pd
 from db_config import get_db_connection
 from datetime import datetime
+from market_utils import is_trading_day, get_next_trading_day
 
 
 # ============================================================================
@@ -106,8 +107,17 @@ def render():
     # ========== 헤더 (한 줄) ==========
     last_update_str = data['last_update'].strftime('%H:%M') if data['last_update'] else 'N/A'
 
+    # 거래일 체크
+    is_trading, reason = is_trading_day()
+    if is_trading:
+        market_status = "🟢 거래일"
+    else:
+        next_trading = get_next_trading_day()
+        next_str = next_trading.strftime('%m/%d') if next_trading else 'N/A'
+        market_status = f"🔴 {reason} | 다음 거래일: {next_str}"
+
     st.markdown(f"""
-    ### 🚀 StockGravity | AI: Gemini 2.5 | Updated: {last_update_str} | Status 🟢
+    ### 🚀 StockGravity | AI: Gemini 2.5 | Updated: {last_update_str} | {market_status}
     """)
 
     st.divider()
